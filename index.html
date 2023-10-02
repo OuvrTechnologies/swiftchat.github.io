@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Chatbot</title>
+</head>
+<body>
+    <div id="chatbox">
+        <!-- Chat messages will be displayed here -->
+        <div id="welcomeMessage">Welcome! How can I assist you today?</div>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            document.getElementById("userInput").value = ""; // Clear the input field
+
+            // Add user's message to the chatbox
+            appendMessage("User", userInput);
+
+            // Respond based on user input
+            const response = generateResponse(userInput);
+            appendMessage("Chatbot", response);
+        }
+
+        function generateResponse(userInput) {
+            // Check if the user's input contains mathematical operations
+            if (/[\+\-\*\/]/.test(userInput)) {
+                try {
+                    const result = eval(userInput); // Evaluate the expression
+                    return `The result is: ${result}`;
+                } catch (error) {
+                    return "Sorry, there was an error in your expression.";
+                }
+            }
+
+            // Check for other specific requests
+            if (userInput.toLowerCase().includes("hello")) {
+                return "Hello! How can I help you?";
+            } else if (userInput.toLowerCase().includes("help")) {
+                return "Sure, I can help. What do you need assistance with?";
+            }
+
+            // For any other input, provide a generic response
+            return "I'm sorry, I don't understand that request.";
+        }
+
+        function appendMessage(sender, message) {
+            const chatbox = document.getElementById("chatbox");
+            const messageDiv = document.createElement("div");
+            messageDiv.innerText = `${sender}: ${message}`;
+            chatbox.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>
