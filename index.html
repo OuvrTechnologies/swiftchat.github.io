@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Chatbot</title>
+    <title>SWIFT-chatbot</title>
 </head>
 <body>
     <div id="chatbox">
@@ -35,11 +35,16 @@
                 }
             }
 
-            // Check for other specific requests
+            // Check for specific requests
             if (userInput.toLowerCase().includes("hello")) {
                 return "Hello! How can I help you?";
             } else if (userInput.toLowerCase().includes("help")) {
                 return "Sure, I can help. What do you need assistance with?";
+            } else if (userInput.toLowerCase().includes("tell me a joke")) {
+                return "Why don't scientists trust atoms? Because they make up everything!";
+            } else if (userInput.toLowerCase().includes("time")) {
+                const currentTime = new Date().toLocaleTimeString();
+                return `The current time is ${currentTime}.`;
             }
 
             // For any other input, provide a generic response
