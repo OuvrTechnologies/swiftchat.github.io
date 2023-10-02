@@ -12,6 +12,30 @@
     <button onclick="sendMessage()">Send</button>
 
     <script>
+        // Define custom commands and responses
+        const customCommands = [
+            {
+                command: "hello",
+                response: "Hello! How can I help you?"
+            },
+            {
+                command: "help",
+                response: "Sure, I can help. What do you need assistance with?"
+            },
+            {
+                command: "joke",
+                response: "Why don't scientists trust atoms? Because they make up everything!"
+            },
+            {
+                command: "time",
+                response: () => {
+                    const currentTime = new Date().toLocaleTimeString();
+                    return `The current time is ${currentTime}.`;
+                }
+            },
+            // Add more custom commands and responses here
+        ];
+
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             document.getElementById("userInput").value = ""; // Clear the input field
@@ -35,16 +59,15 @@
                 }
             }
 
-            // Check for specific requests
-            if (userInput.toLowerCase().includes("hello")) {
-                return "Hello! How can I help you?";
-            } else if (userInput.toLowerCase().includes("help")) {
-                return "Sure, I can help. What do you need assistance with?";
-            } else if (userInput.toLowerCase().includes("tell me a joke")) {
-                return "Why don't scientists trust atoms? Because they make up everything!";
-            } else if (userInput.toLowerCase().includes("time")) {
-                const currentTime = new Date().toLocaleTimeString();
-                return `The current time is ${currentTime}.`;
+            // Check for custom commands
+            for (const customCommand of customCommands) {
+                if (userInput.toLowerCase().includes(customCommand.command)) {
+                    if (typeof customCommand.response === "function") {
+                        return customCommand.response();
+                    } else {
+                        return customCommand.response;
+                    }
+                }
             }
 
             // For any other input, provide a generic response
