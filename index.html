@@ -2,14 +2,58 @@
 <html>
 <head>
     <title>SWIFT-chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #chat-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        #chatbox {
+            max-height: 400px;
+            overflow-y: scroll;
+            padding: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        #userInput {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div id="chatbox">
-        <!-- Chat messages will be displayed here -->
-        <div id="welcomeMessage">Welcome! How can I assist you today?</div>
+    <div id="chat-container">
+        <div id="chatbox">
+            <!-- Chat messages will be displayed here -->
+            <div class="message" id="welcomeMessage">Welcome! How can I assist you today?</div>
+        </div>
+        <input type="text" id="userInput" placeholder="Type your command...">
+        <button onclick="sendMessage()">Send</button>
     </div>
-    <input type="text" id="userInput" placeholder="Type your command...">
-    <button onclick="sendMessage()">Send</button>
 
     <script>
         const chatCommands = {
@@ -67,7 +111,7 @@
             const args = inputParts.slice(1).join(" ");
 
             if (chatCommands.hasOwnProperty(command)) {
-                return chatCommands[command].action(args);
+                return chatCommands[command].action(args) || "No response provided.";
             } else {
                 return "I'm sorry, that command is not recognized. Type 'help' for a list of available commands.";
             }
@@ -76,8 +120,12 @@
         function appendMessage(sender, message) {
             const chatbox = document.getElementById("chatbox");
             const messageDiv = document.createElement("div");
-            messageDiv.innerText = `${sender}: ${message}`;
+            messageDiv.classList.add("message");
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
             chatbox.appendChild(messageDiv);
+
+            // Scroll to the latest message
+            chatbox.scrollTop = chatbox.scrollHeight;
         }
     </script>
 </body>
