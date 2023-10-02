@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SWIFT-chatbot</title>
+    <title>SWIFT-chat</title>
 </head>
 <body>
     <div id="chatbox">
         <!-- Chat messages will be displayed here -->
         <div id="welcomeMessage">Welcome! How can I assist you today?</div>
     </div>
-    <input type="text" id="userInput" placeholder="Type your message...">
+    <input type="text" id="userInput" placeholder="Type your command...">
     <button onclick="sendMessage()">Send</button>
 
     <script>
-        // Define custom commands and responses
-        const customCommands = [
-            {
-                command: "hello",
-                response: "Hello! How can I help you?"
+        const chatCommands = {
+            hello: {
+                description: "Greet the chatbot",
+                action: () => "Hello! How can I help you?"
             },
-            {
-                command: "help",
-                response: "Sure, I can help. What do you need assistance with?"
+            help: {
+                description: "Get help with available commands",
+                action: () => {
+                    const commands = Object.keys(chatCommands);
+                    return "Available commands: " + commands.join(", ");
+                }
             },
-            {
-                command: "joke",
-                response: "Why don't scientists trust atoms? Because they make up everything!"
+            joke: {
+                description: "Tell a joke",
+                action: () => "Why don't scientists trust atoms? Because they make up everything!"
             },
-            {
-                command: "time",
-                response: () => {
+            time: {
+                description: "Get the current time",
+                action: () => {
                     const currentTime = new Date().toLocaleTimeString();
                     return `The current time is ${currentTime}.`;
                 }
             },
-            // Add more custom commands and responses here
-        ];
+            calculate: {
+                description: "Perform calculations",
+                action: (expression) => {
+                    try {
+                        const result = eval(expression);
+                        return `The result of ${expression} is: ${result}`;
+                    } catch (error) {
+                        return "Sorry, there was an error in your expression.";
+                    }
+                }
+            }
+            // Add more commands here
+        };
 
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
@@ -43,35 +56,21 @@
             // Add user's message to the chatbox
             appendMessage("User", userInput);
 
-            // Respond based on user input
-            const response = generateResponse(userInput);
+            // Process the user's command
+            const response = processCommand(userInput);
             appendMessage("Chatbot", response);
         }
 
-        function generateResponse(userInput) {
-            // Check if the user's input contains mathematical operations
-            if (/[\+\-\*\/]/.test(userInput)) {
-                try {
-                    const result = eval(userInput); // Evaluate the expression
-                    return `The result is: ${result}`;
-                } catch (error) {
-                    return "Sorry, there was an error in your expression.";
-                }
-            }
+        function processCommand(userInput) {
+            const inputParts = userInput.trim().split(" ");
+            const command = inputParts[0].toLowerCase();
+            const args = inputParts.slice(1).join(" ");
 
-            // Check for custom commands
-            for (const customCommand of customCommands) {
-                if (userInput.toLowerCase().includes(customCommand.command)) {
-                    if (typeof customCommand.response === "function") {
-                        return customCommand.response();
-                    } else {
-                        return customCommand.response;
-                    }
-                }
+            if (chatCommands.hasOwnProperty(command)) {
+                return chatCommands[command].action(args);
+            } else {
+                return "I'm sorry, that command is not recognized. Type 'help' for a list of available commands.";
             }
-
-            // For any other input, provide a generic response
-            return "I'm sorry, I don't understand that request.";
         }
 
         function appendMessage(sender, message) {
