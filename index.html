@@ -56,43 +56,6 @@
     </div>
 
     <script>
-        const chatCommands = {
-            hello: {
-                description: "Greet the chatbot",
-                action: () => "Hello! How can I help you?"
-            },
-            help: {
-                description: "Get help with available commands",
-                action: () => {
-                    const commands = Object.keys(chatCommands);
-                    return "Available commands: " + commands.join(", ");
-                }
-            },
-            joke: {
-                description: "Tell a joke",
-                action: () => "Why don't scientists trust atoms? Because they make up everything!"
-            },
-            time: {
-                description: "Get the current time",
-                action: () => {
-                    const currentTime = new Date().toLocaleTimeString();
-                    return `The current time is ${currentTime}.`;
-                }
-            },
-            calculate: {
-                description: "Perform calculations",
-                action: (expression) => {
-                    try {
-                        const result = eval(expression);
-                        return `The result of ${expression} is: ${result}`;
-                    } catch (error) {
-                        return "Sorry, there was an error in your expression.";
-                    }
-                }
-            }
-            // Add more commands here
-        };
-
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             document.getElementById("userInput").value = ""; // Clear the input field
@@ -101,19 +64,29 @@
             appendMessage("User", userInput);
 
             // Process the user's command
-            const response = processCommand(userInput);
-            appendMessage("Chatbot", response);
+            processCommand(userInput);
         }
 
         function processCommand(userInput) {
-            const inputParts = userInput.trim().split(" ");
-            const command = inputParts[0].toLowerCase();
-            const args = inputParts.slice(1).join(" ");
+            // Process commands and generate responses based on keywords and patterns
+            userInput = userInput.toLowerCase();
 
-            if (chatCommands.hasOwnProperty(command)) {
-                return chatCommands[command].action(args) || "No response provided.";
+            if (userInput.includes("hello")) {
+                appendMessage("Chatbot", "Hello! How can I help you?");
+            } else if (userInput.includes("help")) {
+                appendMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2').");
+            } else if (userInput.includes("joke")) {
+                fetchJoke();
+            } else if (userInput.includes("time")) {
+                showCurrentTime();
+            } else if (userInput.includes("calculate")) {
+                const expression = userInput.replace("calculate", "").trim();
+                calculateMath(expression);
+            } else if (userInput.includes("capitalize")) {
+                const sentence = userInput.replace("capitalize", "").trim();
+                capitalizeSentence(sentence);
             } else {
-                return "I'm sorry, that command is not recognized. Type 'help' for a list of available commands.";
+                appendMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
         }
 
@@ -126,6 +99,33 @@
 
             // Scroll to the latest message
             chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Additional functions for advanced features:
+
+        function fetchJoke() {
+            // You can fetch jokes from a joke API here
+            // For simplicity, let's use a static joke
+            appendMessage("Chatbot", "Why don't scientists trust atoms? Because they make up everything!");
+        }
+
+        function showCurrentTime() {
+            const currentTime = new Date().toLocaleTimeString();
+            appendMessage("Chatbot", `The current time is ${currentTime}.`);
+        }
+
+        function calculateMath(expression) {
+            try {
+                const result = eval(expression);
+                appendMessage("Chatbot", `The result of ${expression} is: ${result}`);
+            } catch (error) {
+                appendMessage("Chatbot", "Sorry, there was an error in your expression.");
+            }
+        }
+
+        function capitalizeSentence(sentence) {
+            const capitalized = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+            appendMessage("Chatbot", `Capitalized sentence: ${capitalized}`);
         }
     </script>
 </body>
