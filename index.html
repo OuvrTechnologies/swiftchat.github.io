@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SWIFT-chat</title>
+    <title>SWIFTchat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,7 +74,7 @@
             if (userInput.includes("hello")) {
                 appendMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                appendMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2').");
+                appendMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition.");
             } else if (userInput.includes("joke")) {
                 fetchJoke();
             } else if (userInput.includes("time")) {
@@ -85,6 +85,11 @@
             } else if (userInput.includes("capitalize")) {
                 const sentence = userInput.replace("capitalize", "").trim();
                 capitalizeSentence(sentence);
+            } else if (userInput.includes("weather")) {
+                getWeatherInfo();
+            } else if (userInput.includes("define")) {
+                const word = userInput.replace("define", "").trim();
+                defineWord(word);
             } else {
                 appendMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
@@ -126,6 +131,18 @@
         function capitalizeSentence(sentence) {
             const capitalized = sentence.charAt(0).toUpperCase() + sentence.slice(1);
             appendMessage("Chatbot", `Capitalized sentence: ${capitalized}`);
+        }
+
+        function getWeatherInfo() {
+            // You can fetch weather information from a weather API here
+            // For simplicity, let's use a static weather response
+            appendMessage("Chatbot", "The weather is sunny today with a high of 25°C.");
+        }
+
+        function defineWord(word) {
+            // You can fetch word definitions from a dictionary API here
+            // For simplicity, let's use a static definition
+            appendMessage("Chatbot", `The definition of "${word}" is: ...`);
         }
     </script>
 </body>
