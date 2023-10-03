@@ -35,7 +35,6 @@
             border-top: 1px solid #ccc;
             font-size: 16px;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -48,10 +47,10 @@
 </head>
 <body>
     <div id="chat-container">
-        <center> <h1 class="mainh1title">SWIFTchat v1.0</h1> </center>
+        <center> <h1 class="mainh1title">SWIFTchat</h1> </center>
         <div id="chatbox">
             <!-- Chat messages will be displayed here -->
-            <div class="message" id="welcomeMessage">Welcome! How can I assist you today?</div>
+            <div class="message" id="welcomeMessage">Welcome! How can I assist you today? ("Type help for help")</div>
         </div>
         <input type="text" id="userInput" placeholder="Type your command...">
         <button onclick="sendMessage()">Send</button>
@@ -69,78 +68,102 @@
             processCommand(userInput);
         }
 
-        function processCommand(userInput) {
+        async function processCommand(userInput) {
             // Process commands and generate responses based on keywords and patterns
             userInput = userInput.toLowerCase();
 
             if (userInput.includes("hello")) {
-                appendMessage("Chatbot", "Hello! How can I help you?");
+                await typeMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                appendMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date.");
+                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date.");
             } else if (userInput.includes("joke")) {
-                fetchJoke();
+                await fetchJoke();
             } else if (userInput.includes("time")) {
-                showCurrentTime();
+                await showCurrentTime();
             } else if (userInput.includes("calculate")) {
                 const expression = userInput.replace("calculate", "").trim();
-                calculateMath(expression);
+                await calculateMath(expression);
             } else if (userInput.includes("capitalize")) {
                 const sentence = userInput.replace("capitalize", "").trim();
-                capitalizeSentence(sentence);
+                await capitalizeSentence(sentence);
             } else if (userInput.includes("weather")) {
-                getWeatherInfo();
+                await getWeatherInfo();
             } else if (userInput.includes("define")) {
                 const word = userInput.replace("define", "").trim();
-                defineWord(word);
+                await defineWord(word);
             } else if (userInput.includes("date")) {
-                showCurrentDate();
+                await showCurrentDate();
             } else {
-                appendMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
+                await typeMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
         }
 
-        function appendMessage(sender, message) {
+        async function appendMessage(sender, message) {
             const chatbox = document.getElementById("chatbox");
             const messageDiv = document.createElement("div");
             messageDiv.classList.add("message");
-            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            messageDiv.innerHTML = `<strong>${sender}:</strong> <span id="typing">${message}</span>`;
             chatbox.appendChild(messageDiv);
 
             // Scroll to the latest message
             chatbox.scrollTop = chatbox.scrollHeight;
         }
 
+        async function typeMessage(sender, message) {
+            const chatbox = document.getElementById("chatbox");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+            messageDiv.innerHTML = `<strong>${sender}:</strong> `;
+            chatbox.appendChild(messageDiv);
+
+            const typingSpan = document.createElement("span");
+            typingSpan.classList.add("typing");
+            messageDiv.appendChild(typingSpan);
+
+            for (let i = 0; i < message.length; i++) {
+                await sleep(50); // Adjust the typing speed (milliseconds per character)
+                typingSpan.textContent += message[i];
+            }
+
+            // Scroll to the latest message
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         // Additional functions for advanced features:
 
-        function fetchJoke() {
+        async function fetchJoke() {
             // You can fetch jokes from a joke API here
             // For simplicity, let's use a static joke
-            appendMessage("Chatbot", "Why don't scientists trust atoms? Because they make up everything!");
+            await typeMessage("Chatbot", "Why don't scientists trust atoms? Because they make up everything!");
         }
 
-        function showCurrentTime() {
+        async function showCurrentTime() {
             const currentTime = new Date().toLocaleTimeString();
-            appendMessage("Chatbot", `The current time is ${currentTime}.`);
+            await typeMessage("Chatbot", `The current time is ${currentTime}.`);
         }
 
-        function calculateMath(expression) {
+        async function calculateMath(expression) {
             try {
                 const result = eval(expression);
-                appendMessage("Chatbot", `The result of ${expression} is: ${result}`);
+                await typeMessage("Chatbot", `The result of ${expression} is: ${result}`);
             } catch (error) {
-                appendMessage("Chatbot", "Sorry, there was an error in your expression.");
+                await typeMessage("Chatbot", "Sorry, there was an error in your expression.");
             }
         }
 
-        function capitalizeSentence(sentence) {
+        async function capitalizeSentence(sentence) {
             const capitalized = sentence.charAt(0).toUpperCase() + sentence.slice(1);
-            appendMessage("Chatbot", `Capitalized sentence: ${capitalized}`);
+            await typeMessage("Chatbot", `Capitalized sentence: ${capitalized}`);
         }
 
-        function getWeatherInfo() {
+        async function getWeatherInfo() {
             // You can fetch weather information from a weather API here
             // For simplicity, let's use a static weather response
-            appendMessage("Chatbot", "The weather is sunny today with a high of 25°C.");
+            await typeMessage("Chatbot", "The weather is sunny today with a high of 25°C.");
         }
 
         async function defineWord(word) {
@@ -156,20 +179,22 @@
                 const data = await response.json();
 
                 if (data.results && data.results.length > 0) {
-                    appendMessage("Chatbot", `Definition of "${word}": ${data.results[0].definition}`);
+                    await typeMessage("Chatbot", `Definition of "${word}": ${data.results[0].definition}`);
                 } else {
-                    appendMessage("Chatbot", `Sorry, I couldn't find a definition for "${word}".`);
+                    await typeMessage("Chatbot", `Sorry, I couldn't find a definition for "${word}".`);
                 }
             } catch (error) {
                 console.error(error);
-                appendMessage("Chatbot", "An error occurred while fetching the definition.");
+                await typeMessage("Chatbot", "An error occurred while fetching the definition.");
             }
         }
 
-        function showCurrentDate() {
+        async function showCurrentDate() {
             const currentDate = new Date().toLocaleDateString();
-            appendMessage("Chatbot", `The current date is ${currentDate}.`);
+            await typeMessage("Chatbot", `The current date is ${currentDate}.`);
         }
+
+        // Add more functions and APIs as needed for additional capabilities
     </script>
 </body>
 </html>
