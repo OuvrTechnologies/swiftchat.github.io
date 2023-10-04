@@ -57,6 +57,60 @@
     </div>
 
     <script>
+        // Static jokes array
+        const jokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            "I used to play piano by ear, but now I use my hands.",
+            "What do you call a fish with no eyes? Fsh!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "How do you make holy water? You boil the hell out of it!",
+            "I'm reading a book on anti-gravity. It's impossible to put down!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "What do you get when you cross a snowman and a vampire? Frostbite.",
+            "I used to play piano by ear, but now I use my hands.",
+            "What do you call a fish with no eyes? Fsh!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            "I'm on a whiskey diet. I've lost three days already.",
+            "What do you call a bear with no teeth? A gummy bear!",
+            "How do you organize a space party? You 'planet'!",
+            "What did one wall say to the other wall? I'll meet you at the corner.",
+            "Why don't skeletons fight each other? They don't have the guts!",
+            "How do you make a tissue dance? You put a little boogie in it!",
+            "Why did the bicycle fall over? Because it was two-tired!",
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            "I used to play piano by ear, but now I use my hands.",
+            "What do you call a fish with no eyes? Fsh!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "How do you make holy water? You boil the hell out of it!",
+            "I'm reading a book on anti-gravity. It's impossible to put down!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "What do you get when you cross a snowman and a vampire? Frostbite.",
+            "I used to play piano by ear, but now I use my hands.",
+            "What do you call a fish with no eyes? Fsh!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            "I'm on a whiskey diet. I've lost three days already.",
+            "What do you call a bear with no teeth? A gummy bear!",
+            "How do you organize a space party? You 'planet'!",
+            "What did one wall say to the other wall? I'll meet you at the corner.",
+            "Why don't skeletons fight each other? They don't have the guts!",
+            "How do you make a tissue dance? You put a little boogie in it!",
+            "Why did the bicycle fall over? Because it was two-tired!",
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            "I used to play piano by ear, but now I use my hands.",
+            "What do you call a fish with no eyes? Fsh!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "How do you make holy water? You boil the hell out of it!",
+            "I'm reading a book on anti-gravity. It's impossible to put down!",
+            "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+            "What do you get when you cross a snowman and a vampire? Frostbite.",
+        ];
+
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             document.getElementById("userInput").value = ""; // Clear the input field
@@ -75,9 +129,10 @@
             if (userInput.includes("hello")) {
                 await typeMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date.");
+                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting.");
             } else if (userInput.includes("joke")) {
-                await fetchJoke();
+                const randomJokeIndex = Math.floor(Math.random() * jokes.length);
+                await typeMessage("Chatbot", jokes[randomJokeIndex]);
             } else if (userInput.includes("time")) {
                 await showCurrentTime();
             } else if (userInput.includes("calculate")) {
@@ -93,6 +148,8 @@
                 await defineWord(word);
             } else if (userInput.includes("date")) {
                 await showCurrentDate();
+            } else if (userInput.includes("greet")) {
+                await greetUser();
             } else {
                 await typeMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
@@ -134,12 +191,6 @@
         }
 
         // Additional functions for advanced features:
-
-        async function fetchJoke() {
-            // You can fetch jokes from a joke API here
-            // For simplicity, let's use a static joke
-            await typeMessage("Chatbot", "Why don't scientists trust atoms? Because they make up everything!");
-        }
 
         async function showCurrentTime() {
             const currentTime = new Date().toLocaleTimeString();
@@ -194,7 +245,19 @@
             await typeMessage("Chatbot", `The current date is ${currentDate}.`);
         }
 
-        // Add more functions and APIs as needed for additional capabilities
+        // New function for greeting the user
+
+        async function greetUser() {
+            const greetings = [
+                "Hello! How can I assist you today?",
+                "Hi there! What can I help you with?",
+                "Greetings! How may I be of service?",
+                "Hey! How can I assist you?",
+                "Hi! What can I do for you today?",
+            ];
+            const randomGreetingIndex = Math.floor(Math.random() * greetings.length);
+            await typeMessage("Chatbot", greetings[randomGreetingIndex]);
+        }
     </script>
 </body>
 </html>
