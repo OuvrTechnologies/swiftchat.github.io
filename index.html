@@ -5,7 +5,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            color: #ffffff;
+            background-color: #303030;
             margin: 0;
             padding: 0;
             display: flex;
@@ -14,8 +15,9 @@
             height: 100vh;
         }
         #chat-container {
-            background-color: #fff;
-            border: 1px solid #ccc;
+            background-color: #303030;
+            border: 1px solid #636363;
+            color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -23,23 +25,27 @@
         #chatbox {
             max-height: 400px;
             overflow-y: scroll;
+            color: #ffffff;
             padding: 20px;
         }
         .message {
             margin-bottom: 10px;
+            color: #ffffff;
         }
         #userInput {
             width: 100%;
             padding: 10px;
             border: none;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #303030;
+            background-color: #636363;
+            color: #ffffff;
             font-size: 16px;
         }
         button {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
-            color: #fff;
+            color: #ffffff;
             border: none;
             cursor: pointer;
         }
@@ -111,6 +117,47 @@
             "What do you get when you cross a snowman and a vampire? Frostbite.",
         ];
 
+        // Static compliments array
+        const compliments = [
+            "You're incredibly intelligent!",
+            "You have a heart of gold!",
+            "You're a true inspiration!",
+            "Your smile is contagious!",
+            "You make the world a better place!",
+            "You're a great friend!",
+            "You have a fantastic sense of humor!",
+            "You're beautiful inside and out!",
+            "You're a ray of sunshine!",
+            "You're one in a million!"
+        ];
+
+        // Static inspirational quotes array
+        const inspirationalQuotes = [
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "In the middle of every difficulty lies opportunity. - Albert Einstein",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+            "Your time is limited, don't waste it living someone else's life. - Steve Jobs",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
+            "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+            "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+            "It does not matter how slowly you go as long as you do not stop. - Confucius",
+            "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
+            "You are never too old to set another goal or to dream a new dream. - C.S. Lewis"
+        ];
+
+        // Static interesting facts array
+        const interestingFacts = [
+            "The Eiffel Tower can be 15 cm taller during the summer due to the expansion of the iron.",
+            "Honey never spoils; archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+            "A group of flamingos is called a 'flamboyance.'",
+            "The Earth's atmosphere weighs about 5.5 quadrillion tons.",
+            "Cows have best friends and can become stressed when they are separated.",
+            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
+            "There are more possible iterations of a game of chess than there are atoms in the known universe.",
+            "The longest hiccuping spree lasted 68 years.",
+            "Bananas are berries, but strawberries are not."
+        ];
+
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             document.getElementById("userInput").value = ""; // Clear the input field
@@ -129,7 +176,7 @@
             if (userInput.includes("hello")) {
                 await typeMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting.");
+                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting. \n- Type 'compliment' to receive a random compliment. \n- Type 'quote' to receive a random inspirational quote. \n- Type 'fact' to receive a random interesting fact.");
             } else if (userInput.includes("joke")) {
                 const randomJokeIndex = Math.floor(Math.random() * jokes.length);
                 await typeMessage("Chatbot", jokes[randomJokeIndex]);
@@ -150,6 +197,15 @@
                 await showCurrentDate();
             } else if (userInput.includes("greet")) {
                 await greetUser();
+            } else if (userInput.includes("compliment")) {
+                const randomComplimentIndex = Math.floor(Math.random() * compliments.length);
+                await typeMessage("Chatbot", compliments[randomComplimentIndex]);
+            } else if (userInput.includes("quote")) {
+                const randomQuoteIndex = Math.floor(Math.random() * inspirationalQuotes.length);
+                await typeMessage("Chatbot", inspirationalQuotes[randomQuoteIndex]);
+            } else if (userInput.includes("fact")) {
+                const randomFactIndex = Math.floor(Math.random() * interestingFacts.length);
+                await typeMessage("Chatbot", interestingFacts[randomFactIndex]);
             } else {
                 await typeMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
@@ -245,7 +301,7 @@
             await typeMessage("Chatbot", `The current date is ${currentDate}.`);
         }
 
-        // New function for greeting the user
+        // New function for giving compliments to the user
 
         async function greetUser() {
             const greetings = [
