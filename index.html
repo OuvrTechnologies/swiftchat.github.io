@@ -158,6 +158,82 @@
             "Bananas are berries, but strawberries are not."
         ];
 
+        // Static riddles array
+        const riddles = [
+            "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+            "I'm not alive, but I can grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",
+            "I have keys but open no locks. I have space but no room. You can enter, but you can't go inside. What am I?",
+            "The more you take, the more you leave behind. What am I?",
+            "I'm tall when I'm young, and short when I'm old. What am I?",
+            "I have cities but no houses, forests but no trees, and rivers but no water. What am I?"
+        ];
+
+        // Static recipes array
+        const recipes = [
+            "Pasta Carbonara",
+            "Chicken Alfredo",
+            "Homemade Pizza",
+            "Vegetable Stir-Fry",
+            "Chocolate Chip Cookies",
+            "Caesar Salad",
+            "Baked Salmon",
+            "Spaghetti Bolognese",
+            "Mushroom Risotto",
+            "Tacos with Salsa",
+            "Veggie Burger",
+            "Tomato Soup",
+            "Beef Tacos",
+            "Pancakes with Maple Syrup",
+            "Chicken Fajitas",
+            "Avocado Toast",
+            "Chocolate Cake",
+            "Shrimp Scampi",
+            "Vegetable Curry",
+            "Crispy Tofu Stir-Fry"
+        ];
+
+        // Static historical facts array
+        const historicalFacts = [
+            "The Great Wall of China is over 13,000 miles long.",
+            "Leonardo da Vinci's notebook sketches include designs for a helicopter, tank, and machine gun.",
+            "The first successful human heart transplant was performed in 1967 by Dr. Christiaan Barnard.",
+            "The ancient Egyptians used to play a board game called 'Senet,' which dates back to around 3100 BC.",
+            "The Declaration of Independence of the United States was adopted on July 4, 1776.",
+            "The first computer bug was a real insect - a moth that got trapped in a relay of the Harvard Mark II computer in 1947.",
+            "The Wright brothers, Orville and Wilbur, are credited with inventing and building the world's first successful airplane.",
+            "The Eiffel Tower in Paris was completed in 1889 for the Exposition Universelle (World's Fair).",
+            "The ancient city of Rome was founded in 753 BC according to legend.",
+            "The Gutenberg Bible, printed by Johannes Gutenberg, was one of the first major books printed using movable type and the printing press.",
+            "The Suez Canal, connecting the Mediterranean Sea to the Red Sea, was opened in 1869.",
+            "The famous 'Mona Lisa' painting by Leonardo da Vinci is displayed in the Louvre Museum in Paris.",
+            "The Titanic, a passenger liner considered unsinkable, sank on its maiden voyage in 1912 after hitting an iceberg.",
+            "The first successful human moon landing was Apollo 11 in 1969.",
+            "The Statue of Liberty, a gift from France to the United States, was dedicated in 1886."
+        ];
+
+        // Static science facts array
+        const scienceFacts = [
+            "A day on Venus is longer than a year on Venus.",
+            "The octopus has three hearts: two pump blood to the gills, and one pumps it to the rest of the body.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.",
+            "The human brain is more active during sleep than it is while watching TV.",
+            "A bolt of lightning is five times hotter than the surface of the sun.",
+            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after 38 minutes.",
+            "Bananas are berries, but strawberries are not.",
+            "A teaspoonful of neutron star material would weigh about 6 billion tons.",
+            "The total weight of all the ants on Earth is about the same as the total weight of all the humans on Earth.",
+            "The largest desert in the world is not the Sahara, but Antarctica.",
+            "The world's smallest mammal is the bumblebee bat, which weighs less than a penny.",
+            "A group of flamingos is called a 'flamboyance.'",
+            "The world's oldest known creature, a mollusk, was found to be about 507 years old.",
+            "Octopuses have three hearts: two pump blood to the gills, and one pumps it to the rest of the body.",
+            "The Great Wall of China is not visible from space without aid.",
+            "The first computer mouse was made of wood.",
+            "A day on Mercury is longer than its year.",
+            "There are more possible iterations of a game of chess than there are atoms in the known universe.",
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible."
+        ];
+
         function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             document.getElementById("userInput").value = ""; // Clear the input field
@@ -176,7 +252,7 @@
             if (userInput.includes("hello")) {
                 await typeMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting. \n- Type 'compliment' to receive a random compliment. \n- Type 'quote' to receive a random inspirational quote. \n- Type 'fact' to receive a random interesting fact.");
+                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting. \n- Type 'compliment' to receive a random compliment. \n- Type 'quote' to receive a random inspirational quote. \n- Type 'fact' to receive a random interesting fact. \n- Type 'riddle' to receive a random riddle. \n- Type 'recipe' to receive a random recipe. \n- Type 'history' to receive a random historical fact. \n- Type 'science' to receive a random science fact.");
             } else if (userInput.includes("joke")) {
                 const randomJokeIndex = Math.floor(Math.random() * jokes.length);
                 await typeMessage("Chatbot", jokes[randomJokeIndex]);
@@ -206,6 +282,18 @@
             } else if (userInput.includes("fact")) {
                 const randomFactIndex = Math.floor(Math.random() * interestingFacts.length);
                 await typeMessage("Chatbot", interestingFacts[randomFactIndex]);
+            } else if (userInput.includes("riddle")) {
+                const randomRiddleIndex = Math.floor(Math.random() * riddles.length);
+                await typeMessage("Chatbot", riddles[randomRiddleIndex]);
+            } else if (userInput.includes("recipe")) {
+                const randomRecipeIndex = Math.floor(Math.random() * recipes.length);
+                await typeMessage("Chatbot", `Here's a random recipe for you: ${recipes[randomRecipeIndex]}`);
+            } else if (userInput.includes("history")) {
+                const randomHistoryIndex = Math.floor(Math.random() * historicalFacts.length);
+                await typeMessage("Chatbot", `Here's a random historical fact: ${historicalFacts[randomHistoryIndex]}`);
+            } else if (userInput.includes("science")) {
+                const randomScienceIndex = Math.floor(Math.random() * scienceFacts.length);
+                await typeMessage("Chatbot", `Here's a random science fact: ${scienceFacts[randomScienceIndex]}`);
             } else {
                 await typeMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
