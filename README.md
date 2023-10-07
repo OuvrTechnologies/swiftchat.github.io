@@ -6,7 +6,7 @@
 
 <h2 align="center">Access the Site</h2>
 
-<p align="center">The link to the site: "Link is not yet available and the website is not yet setup! Stay tuned..."</p>
+<p align="center">The link to the site: https://abdelrahmanthecoder.github.io/swiftchat.github.io/</p>
 
 <h2 align="center">Issues</h2>
 
