@@ -283,7 +283,7 @@
             if (userInput.includes("hello")) {
                 await typeMessage("Chatbot", "Hello! How can I help you?");
             } else if (userInput.includes("help")) {
-                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting. \n- Type 'compliment' to receive a random compliment. \n- Type 'quote' to receive a random inspirational quote. \n- Type 'fact' to receive a random interesting fact. \n- Type 'riddle' to receive a random riddle. \n- Type 'recipe' to receive a random recipe. \n- Type 'history' to receive a random historical fact. \n- Type 'science' to receive a random science fact. \n- Type 'program' or 'programming' to receive a random programming quote.");
+                await typeMessage("Chatbot", "Here are some available commands: \n- Type 'hello' to greet the chatbot. \n- Type 'help' to see this message. \n- Type 'joke' to hear a joke. \n- Type 'time' to get the current time. \n- Type 'calculate' followed by a math expression (e.g., 'calculate 2 + 2'). \n- Type 'capitalize' followed by a sentence to capitalize it. \n- Type 'weather' to get weather information. \n- Type 'define' followed by a word to get its definition. \n- Type 'date' to get the current date. \n- Type 'greet' to receive a random greeting. \n- Type 'compliment' to receive a random compliment. \n- Type 'quote' to receive a random inspirational quote. \n- Type 'fact' to receive a random interesting fact. \n- Type 'riddle' to receive a random riddle. \n- Type 'recipe' to receive a random recipe. \n- Type 'history' to receive a random historical fact. \n- Type 'science' to receive a random science fact. \n- Type 'program' or 'programming' to receive a random programming quote. \n- Type 'email' to receive an email template.");
             } else if (userInput.includes("joke")) {
                 const randomJokeIndex = Math.floor(Math.random() * jokes.length);
                 await typeMessage("Chatbot", jokes[randomJokeIndex]);
@@ -328,9 +328,21 @@
             } else if (userInput.includes("program") || userInput.includes("programming")) {
                 const randomProgrammingIndex = Math.floor(Math.random() * programmingQuotes.length);
                 await typeMessage("Chatbot", `Here's a random programming quote: ${programmingQuotes[randomProgrammingIndex]}`);
+            } else if (userInput.includes("email")) {
+                await provideEmailTemplate();
             } else {
                 await typeMessage("Chatbot", "I'm sorry, I don't have information on that topic.");
             }
+        }
+
+        function provideEmailTemplate() {
+            const emailTemplate = `<div style="font-family: Arial, sans-serif; padding: 20px;">
+                <h2 style="color: #333333;">Email Template</h2>
+                <p style="color: #333333;">Dear [Recipient's Name],</p>
+                <p style="color: #333333;">[Your message here]</p>
+                <p style="color: #333333;">Sincerely,<br>[Your Name]</p>
+            </div>`;
+            typeMessage("Chatbot", emailTemplate);
         }
 
         async function appendMessage(sender, message) {
@@ -356,7 +368,7 @@
             messageDiv.appendChild(typingSpan);
 
             for (let i = 0; i < message.length; i++) {
-                await sleep(50); // Adjust the typing speed (milliseconds per character)
+                await sleep(25); // Adjust the typing speed (milliseconds per character)
                 typingSpan.textContent += message[i];
             }
 
