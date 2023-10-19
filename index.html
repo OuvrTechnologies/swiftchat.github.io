@@ -59,7 +59,7 @@
             <!-- Chat messages will be displayed here -->
             <div class="message" id="welcomeMessage">Welcome! How can I assist you today? ("Type help for help")</div>
         </div>
-        <input type="text" id="userInput" placeholder="Type your command...">
+        <input type="text" id="userInput" placeholder="Enter a prompt...">
         <button onclick="sendMessage()">Send</button>
     </div>
 
@@ -337,12 +337,10 @@
         }
 
         function provideEmailTemplate() {
-            const emailTemplate = `<div style="font-family: Arial, sans-serif; padding: 20px;">
-                <h2 style="color: #333333;">Email Template</h2>
-                <p style="color: #333333;">Dear [Recipient's Name],</p>
-                <p style="color: #333333;">[Your message here]</p>
-                <p style="color: #333333;">Sincerely,<br>[Your Name]</p>
-            </div>`;
+            const emailTemplate = `Email Subject,
+            Dear "NAME",
+            Text/Paragraph.
+            Sincerely, "YOUR NAME" `;
             typeMessage("Chatbot", emailTemplate);
         }
 
@@ -448,6 +446,41 @@
             ];
             const randomGreetingIndex = Math.floor(Math.random() * greetings.length);
             await typeMessage("Chatbot", greetings[randomGreetingIndex]);
+        }
+
+        // Add an event listener to the input field to disable the button when the input field is empty
+        const userInputField = document.getElementById("userInput");
+        const sendButton = document.querySelector("button");
+
+        // Set initial button state
+        sendButton.disabled = true;
+        sendButton.style.backgroundColor = "#A9A9A9"; // Grayed out color
+
+        userInputField.addEventListener("input", function() {
+            const userInput = userInputField.value.trim();
+            if (userInput === "") {
+                sendButton.disabled = true;
+                sendButton.style.backgroundColor = "#A9A9A9"; // Grayed out color
+            } else {
+                sendButton.disabled = false;
+                sendButton.style.backgroundColor = "#007bff"; // Original color
+            }
+        });
+
+        // Modify the sendMessage function to reset the button state
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            document.getElementById("userInput").value = ""; // Clear the input field
+
+            // Reset button state to grayed-out
+            sendButton.disabled = true;
+            sendButton.style.backgroundColor = "#A9A9A9"; // Grayed out color
+
+            // Add user's message to the chatbox
+            appendMessage("User", userInput);
+
+            // Process the user's command
+            processCommand(userInput);
         }
     </script>
 </body>
