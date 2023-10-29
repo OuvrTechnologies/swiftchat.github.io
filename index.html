@@ -367,7 +367,7 @@
             messageDiv.appendChild(typingSpan);
 
             for (let i = 0; i < message.length; i++) {
-                await sleep(25); // Adjust the typing speed (milliseconds per character)
+                await sleep(20); // Adjust the typing speed (milliseconds per character)
                 typingSpan.textContent += message[i];
             }
 
