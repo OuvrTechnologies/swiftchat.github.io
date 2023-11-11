@@ -58,6 +58,13 @@
             color: #ffffff;
             text-align: center;
         }
+
+        .copy-icon {
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +75,8 @@
             <div class="message" id="welcomeMessage">Type "help" for the chatbot commands</div>
             <div class="message" id="welcomeMessage">Type "joke" to obviously hear a joke</div>
             <div class="message" id="welcomeMessage">Type "fact" to get back a random interesting fun fact</div>
+            <div id="separator" style="height: 2px; background-color: #636363; margin: 10px 0;"></div>
+            <div class="message" id="welcomeMessage">Donate ETH/MATIC to crypto address: 0x77f474B3E568329EBb2eDcBD90aC7a94385fB8F2</div>
             <div id="separator" style="height: 2px; background-color: #636363; margin: 10px 0;"></div>
         </div>
         <input type="text" id="userInput" placeholder="Enter a prompt...">
@@ -493,6 +502,56 @@
             // Process the user's command
             processCommand(userInput);
         }
+
+        // Function to copy text to the clipboard
+        function copyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
+
+        // Modify the typeMessage function to include a copy icon
+        async function typeMessage(sender, message) {
+            const chatbox = document.getElementById("chatbox");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+            messageDiv.innerHTML = `<strong>${sender}:</strong> `;
+            chatbox.appendChild(messageDiv);
+
+            const messageSpan = document.createElement("span");
+            messageDiv.appendChild(messageSpan);
+
+            let i = 0;
+            const typingEffect = setInterval(() => {
+                if (i < message.length) {
+                    messageSpan.textContent += message.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingEffect);
+
+                    // Add a copy icon to the message
+                    const copyIcon = document.createElement("span");
+                    copyIcon.classList.add("copy-icon");
+                    copyIcon.textContent = "📋";
+                    copyIcon.title = "Copy to clipboard";
+                    copyIcon.onclick = function () {
+                        copyTextToClipboard(message);
+                    };
+                    messageDiv.appendChild(copyIcon);
+                }
+            }, 20);
+
+        }
+
+        // Add an event listener for the Enter key to trigger sendMessage
+            document.getElementById("userInput").addEventListener("keyup", function(event) {
+                if (event.key === "Enter") {
+                    sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
