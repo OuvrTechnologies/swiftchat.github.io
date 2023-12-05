@@ -1,79 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SWIFTchat</title>
-    <link rel="icon" href="icon.png" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #ffffff;
-            background-color: #303030;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #chat-container {
-            background-color: #303030;
-            border: 1px solid #636363;
-            color: #ffffff;
-            border-radius: 30px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        #chatbox {
-            max-height: 400px;
-            overflow-y: scroll;
-            color: #ffffff;
-            padding: 20px;
-        }
-        .message {
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        #userInput {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-top: 1px solid #303030;
-            background-color: #636363;
-            color: #ffffff;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 9px;
-            background-color: #0056b8;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-        }
-
-        #welcomeMessage {
-            margin-bottom: 10px;
-            border: 2px solid #4c3d3d;
-            border-radius: 4px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .copy-icon {
-            display: inline-block;
-            vertical-align: middle;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icon2.png" type="image/png">
+  <title>SWIFTchat</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #303030;
+      font-family: 'Arial', sans-serif;
+    }
+    .discord-embed {
+      width: 350px;
+      height: 500px;
+      position: relative;
+    }
+    .discord-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: 2px solid #7289DA;
+      border-radius: 8px;
+    }
+    .discord-embed-header {
+      background-color: #374269;
+      color: #FFFFFF;
+      padding: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      text-align: center;
+    }
+    .discord-embed-description {
+      padding: 10px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+  </style>
 </head>
 <body>
-    <widgetbot
-        server="1140926125984464926"
-        channel="1178620891119226940"
-        width="800"
-        height="700"
-    ></widgetbot>
-    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+    <center>
+        <div class="discord-embed">
+            <div class="discord-embed-header">
+              <h2>SwiftChat</h2>
+            </div>
+            <div class="discord-embed-description">
+              <p>Join the discord server so you can test out SwiftChat in the AI-chat channel</p>
+            </div>
+            <iframe src="https://discord.com/widget?id=1140926125984464926&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </center>
 </body>
 </html>
