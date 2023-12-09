@@ -1,40 +1,55 @@
-require('dotenv')
-const { Client,Util, Collection,MessageEmbed,Structures } = require("discord.js");
-const keepAlive = require('./server.js')
-keepAlive()
-async function errorEmbed(text,message){
-      const newembed = new Discord.MessageEmbed()
-      .setColor("#FF7676")
-      .setDescription(`**❌ | ${text} **`)
-       return message.channel.send(newembed);
-    }
-const Discord = require('discord.js');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const { Client, MessageEmbed } = require('discord.js');
+const axios = require('axios');
+
+const keepAlive = require('./server.js');
+keepAlive();
+
+const channel_id = "1177193645284278333"; // Replace with your channel ID
+const brainshopApiConfig = {
+  bid: 153868,
+  key: 'rcKonOgrUFmn5usX',
+  uid: 1,
+};
+
 const client = new Client({
-    disableEveryone: true
-})
-const axios = require("axios")
-
-
-//=============================================
-const channel_id = "1175318393553948712"
-//=============================================
-
+  disableEveryone: true
+});
 
 client.on('message', async (message) => {
-  if (!message.guild) return;
-  if (message.author.bot) return;
-  try {
-  if (message.channel.id != channel_id) return
-  let res = await axios.get(`http://api.brainshop.ai/get?bid=153868&key=rcKonOgrUFmn5usX&uid=1&msg=${encodeURIComponent(message.content)}`);
-  message.reply(res.data.cnt);
-  } catch {
-   errorEmbed(`Bot error, please try again!`,message)
-   }
-})
+  if (!message.guild || message.author.bot || message.channel.id !== channel_id) return;
 
-client.on('ready', async () => {
-    console.clear()
-    console.log(`${client.user.tag} is online!`)
-})
+  try {
+    const response = await axios.get(`http://api.brainshop.ai/get`, {
+      params: {
+        bid: brainshopApiConfig.bid,
+        key: brainshopApiConfig.key,
+        uid: brainshopApiConfig.uid,
+        msg: encodeURIComponent(message.content),
+      },
+    });
+
+    message.reply(response.data.cnt);
+  } catch (error) {
+    handleErrorResponse('Bot error, please try again!', message, error);
+  }
+});
+
+client.on('ready', () => {
+  console.clear();
+  console.log(`${client.user.tag} is online!`);
+});
 
 client.login(process.env.TOKEN);
+
+function handleErrorResponse(text, message, error) {
+  console.error(error); // Log the error for debugging
+
+  const errorEmbed = new MessageEmbed()
+    .setColor("#FF7676")
+    .setDescription(`**❌ | ${text} **`);
+
+  message.channel.send(errorEmbed);
+}
