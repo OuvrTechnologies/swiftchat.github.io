@@ -9,8 +9,8 @@ keepAlive();
 
 const channel_id = "1177193645284278333"; // Replace with your channel ID
 const brainshopApiConfig = {
-  bid: 153868,
-  key: 'rcKonOgrUFmn5usX',
+  bid: YOURbrainID,
+  key: YOURAPIKEY,
   uid: 1,
 };
 
