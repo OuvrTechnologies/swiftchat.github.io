@@ -1494,6 +1494,5 @@
 
 499. **The Ethics of AI in Autonomous Vehicles:**
     - The ethics of AI in autonomous vehicles addresses ethical considerations surrounding the development and deployment of self-driving cars, exploring issues of safety, liability, decision-making algorithms, and the ethical dilemmas inherent in programming machines to make life-and-death decisions.
-
 500. **The Physics of Quantum Metrology:**
     - The physics of quantum metrology investigates quantum-enhanced measurement techniques for precisely estimating physical quantities, exploring phenomena such as quantum entanglement, squeezing, and precision quantum control, offering advancements in precision measurement beyond classical limits.
