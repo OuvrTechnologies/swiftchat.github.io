@@ -71,11 +71,33 @@
       text-align: center;
       color: #FFFFFF;
     }
+    .mainchatbot-embed-header {
+      background-color: #c65b22;
+      color: #FFFFFF;
+      padding: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      text-align: center;
+    }
+    .mainchatbot-embed-description {
+      background-color: #c65b22;
+      padding: 10px;
+      text-align: center;
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body>
     <center>
+      
         <div class="discord-embed">
+          <div class="mainchatbot-embed-header">
+              <h2>Main ChatBot Edition (MCBE) SwiftChat</h2>
+            </div>
+            <div class="mainchatbot-embed-description">
+              <p>To access the MAIN version of SwiftChat, click the little chat icon in the bottom right of the webpage.</p>
+            </div>
+            <div class="separator"></div>
             <div class="discord-embed-header">
               <h2>SwiftChat (DISCORD Edition)</h2>
             </div>
@@ -98,6 +120,26 @@
               <p>To try out the POE edition of SwiftChat, visit (<a href="https://poe.com/SwiftChat" target="_blank">https://poe.com/SwiftChat</a>)</p>
             </div>
         </div>
+        <script>
+          (function (w, d, s, o, f, js, fjs) {
+            w["botsonic_widget"] = o;
+            w[o] =
+              w[o] ||
+              function () {
+                (w[o].q = w[o].q || []).push(arguments);
+              };
+            (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+            js.id = o;
+            js.src = f;
+            js.async = 1;
+            fjs.parentNode.insertBefore(js, fjs);
+          })(window, document, "script", "Botsonic", "https://widget.writesonic.com/CDN/botsonic.min.js");
+          Botsonic("init", {
+            serviceBaseUrl: "https://api.botsonic.ai",
+            token: "88121b92-6bc0-4559-965c-6a6c7117dd56",
+          });
+        </script>
+        
     </center>
 </body>
 </html>
