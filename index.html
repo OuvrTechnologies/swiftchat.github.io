@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="icon2.png" type="image/png">
-  <title>SWIFTchat</title>
+  <title>SwiftChat</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #303030;
+      background: radial-gradient(circle at 50%, #000000, #212020);
       font-family: 'Arial', sans-serif;
+    }
+    h1 {
+      color: #FFFFFF;
     }
     .discord-embed {
       width: 350px;
@@ -57,9 +60,14 @@
       color: #FFFFFF;
     }
     .separator {
-			height: 10px;
+      height: 10px;
+      width: 290px;
 			background-color: #ddd;
 			margin: 20px 0;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
 		}
     .blackbox-embed-description {
       background-color: #000000;
@@ -89,27 +97,176 @@
       text-align: center;
       color: #FFFFFF;
     }
+    .card {
+      background: linear-gradient(49deg, #cf5b1c 0, #e97e1a 30%, #000000 58%, #ff3b3b 95%);
+      width: 380px;
+      height: 350px;
+      border-radius: 12px;
+      position: relative;
+    }
+    .card2 {
+      background: linear-gradient(49deg, #233796 0, #5e0ede 30%, #130e0e 58%, #44579a 95%);
+      width: 380px;
+      height: 350px;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .card-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 50px 40px;
+      background-color: #222222;
+      color: #ffffff;
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+    .card:hover .card-container {
+      border-radius: 10px;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+    }
+
+    .card2-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 50px 40px;
+      background-color: #222222;
+      color: #ffffff;
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+    .card2:hover .card2-container {
+      border-radius: 10px;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+    }
+
+    .btn {
+      line-height: 1.8rem;
+      border-radius: 9.5px;
+      display: inline-flex;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      position: relative;
+      background-color: #18181b;
+      color: #f4f4f5;
+      transition: background-color 0.2s ease-in-out;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer; /* Not included according to website */
+    }
+
+    .btn:hover {
+      background-color: #0c0c0d;
+    }
+
+    .btn:before {
+      content: "";
+      position: absolute;
+      background: linear-gradient(
+        to right,
+        rgb(0, 220, 130),
+        rgb(54, 228, 218),
+        rgb(22, 167, 158)
+      );
+      inset: -2px;
+      z-index: -1;
+      border-radius: 12.5px;
+      transition: all 0.2s ease 0s;
+    }
+
+    .btn:hover:before {
+      box-shadow: rgba(0, 220, 130, 0.5) 0px 0px 10px 0px,
+      rgba(54, 228, 218, 0.5) 0px 0px 20px 0px;
+    }
+
+    .btn > span {
+      text-align: left;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      word-break: break-all;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      font-family: system-ui;
+    }
+
+    main .btn2 {
+      padding: 1.25ch 2.5ch;
+      color: rgb(0, 183, 255);
+      border: 1px solid rgb(87, 75, 198);
+      border-radius: .5ch;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: lighter;
+      position: relative;
+      transition: filter .35s, transform .35s, opacity .35s;
+      opacity: .9;
+    }
+
+    main .btn2:hover {
+      filter: brightness(125%);
+      opacity: 1;
+    }
+
+    main .btn2:active {
+      transition: transform .1s;
+      transform: scale(.95);
+    }
+
+    main .btn2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(190.82% 190.82% at 50% 100%, rgba(254, 173, 15, 1) 0%, rgba(168, 112, 64, 0.62) 18.09%);
+      opacity: .2;
+      filter: blur(2px);
+    }
   </style>
 </head>
 <body>
     <center>
-      
-        <div class="discord-embed">
-          <div class="mainchatbot-embed-header">
-              <h2>Main ChatBot Edition (MCBE) SwiftChat</h2>
-            </div>
-            <div class="mainchatbot-embed-description">
-              <p>To access the MAIN version of SwiftChat, click the little chat icon in the bottom right of the webpage.</p>
-            </div>
-            <div class="separator"></div>
-            <div class="discord-embed-header">
-              <h2>SwiftChat (DISCORD Edition)</h2>
-            </div>
-            <div class="discord-embed-description">
-              <p>Join the discord server so you can test out the discord version SwiftChat in the AI-chat channel</p>
-            </div>
-            <iframe src="https://discord.com/widget?id=1140926125984464926&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <h1>SwiftChat</h1>
+      <div class="card">
+        <div class="card-container">
+            <h1>SwiftChat Main ChatBot Edition (MCBE)</h1>  
+            <p>
+              To access the MAIN version of SwiftChat, click the little chat icon in the bottom right of the webpage.
+            </p>
         </div>
+      </div>
+        <div class="separator"></div>
+        <div class="card2">
+          <div class="card2-container">
+              <h1>SwiftChat (DISCORD Edition)</h1>  
+              <p>
+                Join the discord server so you can test out the discord version SwiftChat in the AI-chat channel
+              </p>
+              &nbsp;&nbsp;&nbsp;
+              <main>
+                <a href="https://discord.gg/mEyFgp3j28" class="btn2">Join the Discord</a>
+              </main>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;
         <script>
           (function (w, d, s, o, f, js, fjs) {
             w["botsonic_widget"] = o;
@@ -129,7 +286,6 @@
             token: "88121b92-6bc0-4559-965c-6a6c7117dd56",
           });
         </script>
-        
     </center>
 </body>
 </html>
