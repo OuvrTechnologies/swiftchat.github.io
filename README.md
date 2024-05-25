@@ -1,4 +1,4 @@
-<h2 align="center">SWIFT-chat</h2>
+<h2 align="center">Swift chat</h2>
 
 <br/>
 <p align="center">SWIFT-chat is a newly released ai chatbot that aims to be the best out there, come and ride this interesting journey with us!
